@@ -13,24 +13,27 @@ app.use(express.urlencoded({ extended: false }));
 // parse application/json
 app.use(express.json());
 
-// Create some dummy data for pizza api
+// Dummy data for pizza api
 const pizzas = [
   { name: 'funghi', toppings: ['mushrooms', 'mozerella', 'basil'] },
   { name: 'margaritta', toppings: ['buffallo mozerella', 'basil'] },
   { name: 'padana', toppings: ['goats cheese', 'spinach', 'capers'] },
 ];
 
+// Redirect to root
+app.get('/redirect', (req, res) => {
+  res.redirect('/');
+});
+
 // GET data
 app.get('/api/v1/pizzas', (req, res) => {
+  console.log('query string params', req.query);
   return res.json(pizzas);
 });
 
-// Search
-// TODO use query params
-app.get('/api/v1/pizzas/', (req, res) => {
-  // console.log('query string params', req.query.q);
-  // return res.json(pizzas);
-});
+// GET /search?q=tobi+ferret
+// console.dir(req.query.q)
+// => 'tobi ferret'
 
 // ADD data
 app.post('/api/v1/pizzas', (req, res) => {
@@ -76,7 +79,7 @@ app.delete('/api/v1/pizzas/:id', (req, res) => {
   res.sendStatus(204);
 });
 
-// Open the port and listen to changes – npm run start:dev (npx nodemon server.js)
+// Open port and listen to changes – npm run start:dev (npx nodemon server.js)
 app.listen(PORT, () => {
   console.log(`server listening on ${PORT}`);
 });
