@@ -1,5 +1,11 @@
-import { renderCarList } from './render.js';
-import { allCars, fetchData, updateCar, deleteCar, addCar } from './crud.js';
+import {
+  renderCarList,
+  allCars,
+  fetchData,
+  updateCar,
+  deleteCar,
+  addCar,
+} from './crud.js';
 
 import { populate } from './utility.js';
 
@@ -11,7 +17,7 @@ import { populate } from './utility.js';
 
 export const postsMountNode = document.getElementById('posts-target');
 
-export const CARS_ENDPOINT = 'http://localhost:3333/api/v1/pizzas/';
+export const CARS_ENDPOINT = 'http://localhost:3333/api/v1/cars/';
 
 document.addEventListener('DOMContentLoaded', (e) => {
   fetchData(CARS_ENDPOINT);

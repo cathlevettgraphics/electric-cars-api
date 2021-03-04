@@ -55,10 +55,10 @@ export async function addCar(data) {
         'Content-type': 'application/json; charset=UTF-8',
       },
     });
-    // !! I am expecting this to throw an error and not update the dom
-    if (response.status === 500) {
+    if (response.status === 400) {
       throw response;
     }
+
     const newCarData = await response.json();
 
     allCars.push(newCarData);
