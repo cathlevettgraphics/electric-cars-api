@@ -2,4 +2,4 @@
 
 ## npm run start:dev
 
-### get -> push –> post -> delete
+### get -> post –> put -> delete
