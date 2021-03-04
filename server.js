@@ -23,8 +23,8 @@ const { Schema } = mongoose;
 
 const pizzaSchema = new Schema({
   name: String,
-  toppings: [],
-  image_url: {
+  bhp: String,
+  avatar_url: {
     type: String,
     default: 'https://www.iconpacks.net/icons/1/free-car-icon-1057-thumb.png',
   },
@@ -62,7 +62,7 @@ app.get('/api/v1/pizzas/:id?', (req, res) => {
     filters._id = id;
   }
 
-  Pizza.find({}).exec((err, pizzas) => {
+  Pizza.find(filters).exec((err, pizzas) => {
     if (err) {
       return res.status(500).send(err);
     }
@@ -71,12 +71,19 @@ app.get('/api/v1/pizzas/:id?', (req, res) => {
 });
 
 // ADD data
-app.post('/api/v1/pizzas', (req, res) => {
+app.post('/api/v1/pizzas/', (req, res) => {
   console.log(req.body);
   const newPizza = new Pizza(req.body);
 
   newPizza.save((err, pizza) => {
-    if (err) {
+    // console.log(pizza.avatar_url.length);
+    // !! If name is blank, err msg renders and car not added BUT data still pushed to database and renders on refresh
+    if (
+      err ||
+      pizza.name.length === 0 ||
+      pizza.bhp.length === 0 ||
+      pizza.avatar_url.length === 0
+    ) {
       return res.status(500).send(err);
     }
     res.status(201).send(pizza);
@@ -110,6 +117,10 @@ app.delete('/api/v1/pizzas/:id', (req, res) => {
     }
     res.sendStatus(204);
   });
+});
+
+app.all('*', (req, res) => {
+  res.sendStatus(404);
 });
 
 // Open port and listen to changes – npm run start:dev (npx nodemon server.js)

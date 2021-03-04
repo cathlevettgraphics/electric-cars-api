@@ -25,6 +25,7 @@ Icon
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
 server-in-memory.js
+issues.txt
 
 # Directories potentially created on remote AFP share
 .AppleDB
