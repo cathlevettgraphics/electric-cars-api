@@ -1,4 +1,4 @@
-# pizza api: express mongodb and mongoose
+# electric-cars api: express mongodb and mongoose
 
 ## npm run start:dev
 
